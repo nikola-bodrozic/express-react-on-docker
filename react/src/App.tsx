@@ -33,14 +33,15 @@ function App() {
 
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState<IUser[]>([]);
-
+  const [rows, setRows] = useState<any>([])
+ 
   useEffect(() => {
     let mounted = true;
     const getData = async () => {
       try {
         let res = await axiosClient.get("/users");
         let users = res.data;
-        setUsers(users);
+        setRows(users);
       } catch (error) {
         console.error(error);
       } finally {
@@ -53,11 +54,11 @@ function App() {
     };
   }, []);
 
-  const rows = [
-    createData("i1", "desc parent", "","Open", "2024-05-01T11:02", "yahoo.com"),
-    createData("i2", "desc child 1", "i1","Open", "2024-05-01T11:02", "yahoo.com"),
-    createData("i3", "desc child 2", "i1","Closed", "2024-05-01T11:02", "yahoo.com"),
-  ];
+  // const rows = [
+  //   createData("i1", "desc parentttt", "","Open", "2024-05-01T11:02", "yahoo.com"),
+  //   createData("i2", "desc child 1", "i1","Open", "2024-05-01T11:02", "yahoo.com"),
+  //   createData("i3", "desc child 2", "i1","Closed", "2024-05-01T11:02", "yahoo.com"),
+  // ];
 
   return (
     <div className="App">
@@ -118,7 +119,7 @@ function App() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {rows.map((row: any) => (
               <TableRow key={row.id}>
                 <TableCell component="th" scope="row">
                   {row.id}
