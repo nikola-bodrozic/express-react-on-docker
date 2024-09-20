@@ -28,8 +28,6 @@ Production build is running on <http://localhost> after `docker-compose up`
 
 It calls Nodejs service to get data from the API endpoints.
 
-Axios in useEffect with Async / Await and unmount, Loader, Routes, Retry API calls, deal with error HTTP responses and axios timeout
-
 ## Debug locally react app
 
 - install `Debugger for Chrome` on Code
