@@ -13,18 +13,22 @@ import Paper from "@mui/material/Paper";
 function App() {
   interface IUser {
     id: string;
-    parentId: string;
     description: string;
-    link: any;
+    parentId: string;
+    status: string;
+    creationTimestamp: string;
+    link: string;
   }
 
   function createData(
     id: string,
-    parentId: string,
     description: string,
-    link: any
+    parentId: string,
+    status: string,
+    creationTimestamp: string,
+    link: string
   ) {
-    return { id, parentId, description, link };
+    return { id, description, parentId, status, creationTimestamp, link };
   }
 
   const [loading, setLoading] = useState(true);
@@ -50,9 +54,9 @@ function App() {
   }, []);
 
   const rows = [
-    createData("i1", "", "desc parent", "yahoo.com"),
-    createData("i2", "i1", "desc child 1", "yahoo.com"),
-    createData("i3", "i1", "desc child 2", "yahoo.com"),
+    createData("i1", "desc parent", "","Open", "2024-05-01T11:02", "yahoo.com"),
+    createData("i2", "desc child 1", "i1","Open", "2024-05-01T11:02", "yahoo.com"),
+    createData("i3", "desc child 2", "i1","Open", "2024-05-01T11:02", "yahoo.com"),
   ];
 
   return (
@@ -64,48 +68,50 @@ function App() {
   );
 
   function renderTable() {
+    const headerStyle = {
+      bgcolor: "lightgray",
+      boxShadow: 1,
+      minWidth: 30,
+    }
     return (
       <TableContainer component={Paper}>
-        <Table sx={{ maxWidth: 300 }} aria-label="simple table">
+        <Table sx={{ maxWidth: 700 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell
                 align="left"
-                sx={{
-                  bgcolor: "lightgray",
-                  boxShadow: 1,
-                  minWidth: 150,
-                }}
+                sx={headerStyle}
               >
                 id
               </TableCell>
               <TableCell
+              width={250}
                 align="left"
-                sx={{
-                  bgcolor: "lightgray",
-                  boxShadow: 1,
-                  minWidth: 30,
-                }}
+                sx={headerStyle}
               >
                 description
               </TableCell>
               <TableCell
                 align="left"
-                sx={{
-                  bgcolor: "lightgray",
-                  boxShadow: 1,
-                  minWidth: 30,
-                }}
+                sx={headerStyle}
               >
                 Parent id
               </TableCell>
               <TableCell
                 align="left"
-                sx={{
-                  bgcolor: "lightgray",
-                  boxShadow: 1,
-                  minWidth: 30,
-                }}
+                sx={headerStyle}
+              >
+               time stamp
+              </TableCell>
+              <TableCell
+                align="left"
+                sx={headerStyle}
+              >
+               creation timestamp
+              </TableCell>
+              <TableCell
+                align="left"
+                sx={headerStyle}
               >
                 link
               </TableCell>
@@ -122,6 +128,12 @@ function App() {
                 </TableCell>
                 <TableCell component="th" scope="row">
                   {row.parentId}
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  {row.status}
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  {row.creationTimestamp}
                 </TableCell>
                 <TableCell component="th" scope="row">
                   {row.link}
