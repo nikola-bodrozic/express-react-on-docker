@@ -5,7 +5,9 @@
     "start": "nodemon app.js"
   },
   "dependencies": {
+    "assert": "^2.1.0",
     "cors": "~2.8.5",
+    "csv": "^6.3.10",
     "dotenv": "^16.0.2",
     "express": "~4.16.1",
     "nodemon": "^3.1.6"

@@ -2,12 +2,13 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const port = 3008;
+const csv = require("csvtojson");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-const delay = 1000;
+const delay = 50;
 
 const users = [
   {
@@ -28,7 +29,14 @@ const apiUrl = "/api/v1";
 app.get(`${apiUrl}/users`, (req, res) => {
   // res.json(users);
   setTimeout(() => {
-    res.json(users);
+    ///////////////////////////////////////////
+    const csvFilePath = "./data.csv";
+    csv()
+      .fromFile(csvFilePath)
+      .then((jsonObj) => {
+         res.json(jsonObj);
+      });
+    /////////////////////////////////////////////
   }, delay);
 });
 
