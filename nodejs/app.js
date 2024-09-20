@@ -27,16 +27,13 @@ const users = [
 const apiUrl = "/api/v1";
 
 app.get(`${apiUrl}/users`, (req, res) => {
-  // res.json(users);
   setTimeout(() => {
-    ///////////////////////////////////////////
     const csvFilePath = "./data.csv";
     csv()
       .fromFile(csvFilePath)
       .then((jsonObj) => {
          res.json(jsonObj);
       });
-    /////////////////////////////////////////////
   }, delay);
 });
 
