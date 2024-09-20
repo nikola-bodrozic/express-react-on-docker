@@ -12,19 +12,23 @@ import Paper from "@mui/material/Paper";
 
 function App() {
   interface IUser {
-    id: number;
-    name: string;
+    id: string;
+    parentId: string;
+    description: string;
+    link: any;
+  }
+
+  function createData(
+    id: string,
+    parentId: string,
+    description: string,
+    link: any
+  ) {
+    return { id, parentId, description, link };
   }
 
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState<IUser[]>([]);
-
-  const validateName = (users: IUser[]) => {
-    const filtered: IUser[] = users.filter(
-      (user: IUser) => user.name.length > 1
-    );
-    return filtered;
-  };
 
   useEffect(() => {
     let mounted = true;
@@ -32,7 +36,6 @@ function App() {
       try {
         let res = await axiosClient.get("/users");
         let users = res.data;
-        users = validateName(users);
         setUsers(users);
       } catch (error) {
         console.error(error);
@@ -45,27 +48,17 @@ function App() {
       mounted = false;
     };
   }, []);
-  function createData(
-    name: string,
-    id: number,
-  ) {
-    return { name, id };
-  }
 
   const rows = [
-    createData("Frozen yoghurt", 159),
-    createData("Ice cream sandwich", 237),
+    createData("i1", "", "desc parent", "yahoo.com"),
+    createData("i2", "i1", "desc child 1", "yahoo.com"),
+    createData("i3", "i1", "desc child 2", "yahoo.com"),
   ];
 
   return (
     <div className="App">
       <div className="App-border">
-        {loading ? (
-          <SpinnerCircular thickness={300} />
-        ) : (
-          // users.map((user) => <div key={user.id}>{user.name}</div>)
-          renderTable()
-        )}
+        {loading ? <SpinnerCircular thickness={300} /> : renderTable()}
       </div>
     </div>
   );
@@ -73,21 +66,65 @@ function App() {
   function renderTable() {
     return (
       <TableContainer component={Paper}>
-        <Table sx={{ maxWidth:300 }} aria-label="simple table">
+        <Table sx={{ maxWidth: 300 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell align="left">name</TableCell>
-              <TableCell align="left">id</TableCell>
+              <TableCell
+                align="left"
+                sx={{
+                  bgcolor: "lightgray",
+                  boxShadow: 1,
+                  minWidth: 150,
+                }}
+              >
+                id
+              </TableCell>
+              <TableCell
+                align="left"
+                sx={{
+                  bgcolor: "lightgray",
+                  boxShadow: 1,
+                  minWidth: 30,
+                }}
+              >
+                description
+              </TableCell>
+              <TableCell
+                align="left"
+                sx={{
+                  bgcolor: "lightgray",
+                  boxShadow: 1,
+                  minWidth: 30,
+                }}
+              >
+                Parent id
+              </TableCell>
+              <TableCell
+                align="left"
+                sx={{
+                  bgcolor: "lightgray",
+                  boxShadow: 1,
+                  minWidth: 30,
+                }}
+              >
+                link
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {rows.map((row) => (
               <TableRow key={row.id}>
                 <TableCell component="th" scope="row">
-                  {row.name}
+                  {row.id}
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  {row.id}
+                  {row.description}
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  {row.parentId}
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  {row.link}
                 </TableCell>
               </TableRow>
             ))}
