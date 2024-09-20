@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./App.css";
+import axios from "axios";
 import { SpinnerCircular } from "spinners-react";
 import { axiosClient } from "./axiosClient";
 import Table from "@mui/material/Table";
@@ -9,6 +10,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
 
 function App() {
   interface IUser {
@@ -33,8 +35,8 @@ function App() {
 
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState<IUser[]>([]);
-  const [rows, setRows] = useState<any>([])
- 
+  const [rows, setRows] = useState<any>([]);
+
   useEffect(() => {
     let mounted = true;
     const getData = async () => {
@@ -54,12 +56,6 @@ function App() {
     };
   }, []);
 
-  // const rows = [
-  //   createData("i1", "desc parentttt", "","Open", "2024-05-01T11:02", "yahoo.com"),
-  //   createData("i2", "desc child 1", "i1","Open", "2024-05-01T11:02", "yahoo.com"),
-  //   createData("i3", "desc child 2", "i1","Closed", "2024-05-01T11:02", "yahoo.com"),
-  // ];
-
   return (
     <div className="App">
       <div className="App-border">
@@ -73,77 +69,66 @@ function App() {
       bgcolor: "lightgray",
       boxShadow: 1,
       minWidth: 30,
-    }
+    };
     return (
-      <TableContainer component={Paper}>
-        <Table sx={{ maxWidth: 700 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell
-                align="left"
-                sx={headerStyle}
-              >
-                id
-              </TableCell>
-              <TableCell
-              width={250}
-                align="left"
-                sx={headerStyle}
-              >
-                description
-              </TableCell>
-              <TableCell
-                align="left"
-                sx={headerStyle}
-              >
-                Parent id
-              </TableCell>
-              <TableCell
-                align="left"
-                sx={headerStyle}
-              >
-               time stamp
-              </TableCell>
-              <TableCell
-                align="left"
-                sx={headerStyle}
-              >
-               creation timestamp
-              </TableCell>
-              <TableCell
-                align="left"
-                sx={headerStyle}
-              >
-                link
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row: any) => (
-              <TableRow key={row.id}>
-                <TableCell component="th" scope="row">
-                  {row.id}
+      <>
+        <TableContainer component={Paper}>
+          <Table sx={{ maxWidth: 700 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell align="left" sx={headerStyle}>
+                  id
                 </TableCell>
-                <TableCell component="th" scope="row">
-                  {row.description}
+                <TableCell width={250} align="left" sx={headerStyle}>
+                  description
                 </TableCell>
-                <TableCell component="th" scope="row">
-                  {row.parentId}
+                <TableCell align="left" sx={headerStyle}>
+                  Parent id
                 </TableCell>
-                <TableCell component="th" scope="row">
-                  {row.status}
+                <TableCell align="left" sx={headerStyle}>
+                  time stamp
                 </TableCell>
-                <TableCell component="th" scope="row">
-                  {row.creationTimestamp}
+                <TableCell align="left" sx={headerStyle}>
+                  creation timestamp
                 </TableCell>
-                <TableCell component="th" scope="row">
-                  {row.link}
+                <TableCell align="left" sx={headerStyle}>
+                  link
                 </TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {rows.map((row: any) => (
+                <TableRow key={row.id}>
+                  <TableCell component="th" scope="row">
+                    {row.id}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {row.description}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {row.parentId}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {row.status}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {row.creationTimestamp}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {row.link}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <Button
+          variant="contained"
+          onClick={(event: any) => {axiosClient.post("/users2");}}
+        >
+          Contained
+        </Button>
+      </>
     );
   }
 }

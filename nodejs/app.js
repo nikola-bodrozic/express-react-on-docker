@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 const port = 3008;
 const csv = require("csvtojson");
+// let converter = require('json-2-csv');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -40,6 +41,11 @@ app.get(`${apiUrl}/users`, (req, res) => {
 app.get(`${apiUrl}/users/id:`, (req, res) => {
   const result = getUser(req.params.id);
   res.json(result);
+});
+
+app.post(`${apiUrl}/users2`, function (req, res) {
+  const first = req;
+  console.log(first.params, first.headers)
 });
 
 getUser = (id) => {
