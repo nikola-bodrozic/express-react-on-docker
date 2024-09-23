@@ -90,7 +90,7 @@ function App() {
                   link
                 </TableCell>
                 <TableCell align="left" sx={headerStyle}>
-                  action
+                  Change status
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -120,7 +120,7 @@ function App() {
                       variant="contained"
                       onClick={() => handleClick(row.id)}
                     >
-                      Action
+                      change status
                     </Button>
                   </TableCell>
                 </TableRow>

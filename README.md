@@ -19,22 +19,12 @@ docker compose up
 ## Nodejs
 
 Express server with API endpoints at 
-- <http://localhost:3008/api/v1/users> gets users
-- <http://localhost:3008/api/v1/users/:id> gets user
+- GET <http://localhost:3008/api/v1/users> gets users
+- POST <http://localhost:3008/api/v1/users/> send user id
 
 ## React
 
-Production build is running on <http://localhost> after `docker-compose up` 
+Development build <http://localhost:3000>
 
-It calls Nodejs service to get data from the API endpoints.
+Production build is running on <http://localhost> and is generated after `docker compose up` 
 
-## Debug locally react app
-
-- install `Debugger for Chrome` on Code
-- `yarn start`
-- set break points & run debugger
-
-## Debug locally NodeJS
-
-- set break points
-- run debugger
