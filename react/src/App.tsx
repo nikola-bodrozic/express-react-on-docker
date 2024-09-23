@@ -21,19 +21,7 @@ function App() {
     link: string;
   }
 
-  function createData(
-    id: string,
-    description: string,
-    parentId: string,
-    status: string,
-    creationTimestamp: string,
-    link: string
-  ) {
-    return { id, description, parentId, status, creationTimestamp, link };
-  }
-
   const [loading, setLoading] = useState(true);
-  const [users, setUsers] = useState<IUser[]>([]);
   const [rows, setRows] = useState<any>([]);
 
   useEffect(() => {
@@ -62,14 +50,13 @@ function App() {
       description: "new desc",
       parentId: "i1",
       status: "open",
-      creationTimestamp: "new stamp",
+      creationTimestamp: "new stamp from frontend",
       link: "google.com",
     };
     
     axiosClient.post("/users", userData).then((response) => {
       console.log(response.data);
       setRows(response.data)
-      
     });
   };
 
@@ -142,7 +129,6 @@ function App() {
         <Button variant="contained" onClick={handleSubmit}>
           Contained
         </Button>
-        <>{JSON.stringify(users)}</>
       </>
     );
   }

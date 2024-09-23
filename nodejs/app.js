@@ -39,12 +39,13 @@ app.get(`${apiUrl}/users`, (req, res) => {
 });
 
 app.post(`${apiUrl}/users`, function (req, res) {
+  console.log(req.body)
   res.json([{
     id: "i8",
     description: "new desc",
     parentId: "i1",
     status: "open",
-    creationTimestamp: "new stamp",
+    creationTimestamp: "new stamp from backend",
     link: "google.com",
   }])
 });
