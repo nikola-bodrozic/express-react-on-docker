@@ -44,8 +44,10 @@ app.get(`${apiUrl}/users/id:`, (req, res) => {
 });
 
 app.post(`${apiUrl}/users2`, function (req, res) {
-  const first = req;
-  console.log(first.params, first.headers)
+  // const first = req;
+  const test = {s:"q"}
+  console.log(req.body)
+  res.json(test)
 });
 
 getUser = (id) => {

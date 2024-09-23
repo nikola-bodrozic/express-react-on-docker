@@ -56,6 +56,17 @@ function App() {
     };
   }, []);
 
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    const userData = {
+      name: "state.name",
+      job: "state.job"
+    };
+    axiosClient.post("/users2", userData).then((response) => {
+      console.log(response.status, response.data);
+    });
+  };
+
   return (
     <div className="App">
       <div className="App-border">
@@ -124,7 +135,7 @@ function App() {
         </TableContainer>
         <Button
           variant="contained"
-          onClick={(event: any) => {axiosClient.post("/users2");}}
+          onClick={handleSubmit}
         >
           Contained
         </Button>

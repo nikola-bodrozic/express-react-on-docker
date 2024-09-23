@@ -6,7 +6,4 @@ console.log("React env. variable: ", process.env.REACT_APP_NODE_IP)
 export const axiosClient: AxiosInstance = axios.create({
 	baseURL,
 	timeout: 2000,
-	headers: {
-		MyHeader: 'MyValue',
-	},
 });
