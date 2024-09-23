@@ -43,19 +43,10 @@ function App() {
     };
   }, []);
 
-  const handleClick = (param: string | number) => {
-    console.log(param);
-    const userData: IUser = {
-      id: "i5",
-      description: "new desc",
-      parentId: "i1",
-      status: "open",
-      creationTimestamp: "new stamp from frontend",
-      link: "google.com",
-    };
-
-    axiosClient.post("/users", userData).then((response) => {
-      // console.log(response.data);
+  const handleClick = (id: string | number) => {
+    // console.log(id);
+    const userId: any = { id };
+    axiosClient.post("/users", userId).then((response) => {
       setRows(response.data);
     });
   };
