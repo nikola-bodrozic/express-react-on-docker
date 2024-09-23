@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import axios from "axios";
 import { SpinnerCircular } from "spinners-react";
 import { axiosClient } from "./axiosClient";
 import Table from "@mui/material/Table";
@@ -58,11 +57,15 @@ function App() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    const userData = {
-      name: "state.name",
-      job: "state.job"
+    const userData: IUser = {
+      id: "i5",
+      description: "new desc",
+      parentId: "i1",
+      status: "open",
+      creationTimestamp: "new stamp",
+      link: "google.com",
     };
-    axiosClient.post("/users2", userData).then((response) => {
+    axiosClient.post("/users", userData).then((response) => {
       console.log(response.status, response.data);
     });
   };
@@ -133,10 +136,7 @@ function App() {
             </TableBody>
           </Table>
         </TableContainer>
-        <Button
-          variant="contained"
-          onClick={handleSubmit}
-        >
+        <Button variant="contained" onClick={handleSubmit}>
           Contained
         </Button>
       </>

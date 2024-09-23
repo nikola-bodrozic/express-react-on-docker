@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-const delay = 50;
+const delay = 50; // set delay to show loader
 
 const users = [
   {
@@ -38,24 +38,10 @@ app.get(`${apiUrl}/users`, (req, res) => {
   }, delay);
 });
 
-app.get(`${apiUrl}/users/id:`, (req, res) => {
-  const result = getUser(req.params.id);
-  res.json(result);
-});
-
-app.post(`${apiUrl}/users2`, function (req, res) {
-  // const first = req;
+app.post(`${apiUrl}/users`, function (req, res) {
   const test = {s:"q"}
   console.log(req.body)
   res.json(test)
 });
-
-getUser = (id) => {
-  if (id > 2)
-    return {
-      msg: "user doesn't exist",
-    };
-  return users[id - 1];
-};
 
 app.listen(port, () => console.log(`Node API up at http://localhost:${port}`));
