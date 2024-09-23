@@ -35,7 +35,7 @@ app.post(`${apiUrl}/users`, function (req, res) {
         }
       });
       // console.log(jsonObj)
-      csv = converter.json2csv(jsonObj);
+      csvString = converter.json2csv(jsonObj);
       res.json(jsonObj);
     });
 
