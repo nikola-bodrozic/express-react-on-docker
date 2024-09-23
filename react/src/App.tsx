@@ -65,8 +65,11 @@ function App() {
       creationTimestamp: "new stamp",
       link: "google.com",
     };
+    
     axiosClient.post("/users", userData).then((response) => {
       console.log(response.status, response.data);
+      setUsers(response.data)
+      
     });
   };
 
@@ -139,6 +142,7 @@ function App() {
         <Button variant="contained" onClick={handleSubmit}>
           Contained
         </Button>
+        <>{JSON.stringify(users)}</>
       </>
     );
   }
