@@ -67,8 +67,8 @@ function App() {
     };
     
     axiosClient.post("/users", userData).then((response) => {
-      console.log(response.status, response.data);
-      setUsers(response.data)
+      console.log(response.data);
+      setRows(response.data)
       
     });
   };

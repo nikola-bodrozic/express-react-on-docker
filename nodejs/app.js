@@ -39,9 +39,14 @@ app.get(`${apiUrl}/users`, (req, res) => {
 });
 
 app.post(`${apiUrl}/users`, function (req, res) {
-  const test = {s:"q"}
-  console.log(req.body)
-  res.json(req.body)
+  res.json([{
+    id: "i8",
+    description: "new desc",
+    parentId: "i1",
+    status: "open",
+    creationTimestamp: "new stamp",
+    link: "google.com",
+  }])
 });
 
 app.listen(port, () => console.log(`Node API up at http://localhost:${port}`));
