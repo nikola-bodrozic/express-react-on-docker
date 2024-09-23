@@ -3,51 +3,33 @@ const app = express();
 const cors = require("cors");
 const port = 3008;
 const csv = require("csvtojson");
-// let converter = require('json-2-csv');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-const delay = 50; // set delay to show loader
-
-const users = [
-  {
-    id: 1,
-    name: "ronald",
-  },
-  {
-    id: 2,
-    name: "jacob",
-  },
-  {
-    id: 3,
-    name: "e",
-  },
-];
 const apiUrl = "/api/v1";
+const csvFilePath = "./data.csv";
 
 app.get(`${apiUrl}/users`, (req, res) => {
-  setTimeout(() => {
-    const csvFilePath = "./data.csv";
-    csv()
-      .fromFile(csvFilePath)
-      .then((jsonObj) => {
-         res.json(jsonObj);
-      });
-  }, delay);
+  csv()
+    .fromFile(csvFilePath)
+    .then((jsonObj) => {
+      res.json(jsonObj);
+    });
 });
 
 app.post(`${apiUrl}/users`, function (req, res) {
-  console.log(req.body)
-  res.json([{
-    id: "i8",
-    description: "new desc",
-    parentId: "i1",
-    status: "open",
-    creationTimestamp: "new stamp from backend",
-    link: "google.com",
-  }])
+  csv()
+    .fromFile(csvFilePath)
+    .then((jsonObj) => {
+      // merge array
+      
+
+
+      //
+      res.json(jsonObj);
+    });
 });
 
 app.listen(port, () => console.log(`Node API up at http://localhost:${port}`));

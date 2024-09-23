@@ -43,8 +43,8 @@ function App() {
     };
   }, []);
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
+  const handleClick = (param: string | number) => {
+    console.log(param);
     const userData: IUser = {
       id: "i5",
       description: "new desc",
@@ -53,10 +53,10 @@ function App() {
       creationTimestamp: "new stamp from frontend",
       link: "google.com",
     };
-    
+
     axiosClient.post("/users", userData).then((response) => {
-      console.log(response.data);
-      setRows(response.data)
+      // console.log(response.data);
+      setRows(response.data);
     });
   };
 
@@ -90,13 +90,16 @@ function App() {
                   Parent id
                 </TableCell>
                 <TableCell align="left" sx={headerStyle}>
-                  time stamp
+                  status
                 </TableCell>
                 <TableCell align="left" sx={headerStyle}>
                   creation timestamp
                 </TableCell>
                 <TableCell align="left" sx={headerStyle}>
                   link
+                </TableCell>
+                <TableCell align="left" sx={headerStyle}>
+                  action
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -121,14 +124,19 @@ function App() {
                   <TableCell component="th" scope="row">
                     {row.link}
                   </TableCell>
+                  <TableCell component="th" scope="row">
+                    <Button
+                      variant="contained"
+                      onClick={() => handleClick(row.id)}
+                    >
+                      Action
+                    </Button>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
-        <Button variant="contained" onClick={handleSubmit}>
-          Contained
-        </Button>
       </>
     );
   }
