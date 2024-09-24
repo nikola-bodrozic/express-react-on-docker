@@ -1,4 +1,4 @@
 id,description,parentId,status,creationTimestamp,link
 i1,parent desc,p,Open,2024-05-01T11:02,yahoo.com
-i2,child 1 desc,i1,Closed,2024-05-01T11:02,yahoo.com
+i2,child 1 desc,i1,Open,2024-05-01T11:02,yahoo.com
 i3,child 2 desc,i1,Open,2024-05-01T11:02,yahoo.com

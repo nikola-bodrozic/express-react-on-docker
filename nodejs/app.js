@@ -22,31 +22,28 @@ app.get(`${apiUrl}/users`, (req, res) => {
 });
 
 app.post(`${apiUrl}/users`, function (req, res) {
-  // console.log(req.body.id)
-  let csvString = "";
   csv()
     .fromFile(csvFilePath)
     .then((jsonObj) => {
-      jsonObj.map((item) => {
-        // console.log(item.id);
-        if (item.id === req.body.id) {
-          if (item.status === "Open") item.status = "Closed";
-          if (item.status === "Closed") item.status = "Open";
+      const tmpJson = jsonObj.map((item) => {
+        if (item.id == req.body.id) {
+          if (item.status == "Open") item.status = "Closed";
+          else item.status = "Open";
+        }
+        return item;
+      });
+      console.table(tmpJson);
+      // write modification to file
+      const csvString = converter.json2csv(tmpJson);
+      fs.writeFile(csvFilePath, csvString, (err) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log("file successfully  written");
         }
       });
-      // console.log(jsonObj)
-      csvString = converter.json2csv(jsonObj);
-      res.json(jsonObj);
+      res.json(tmpJson);
     });
-
-    // write modification to file
-  fs.writeFile(csvFilePath, csvString, (err) => {
-    if (err) {
-      console.error(err);
-    } else {
-      console.log("file successfully  written");
-    }
-  });
 });
 
 app.listen(port, () => console.log(`Node API up at http://localhost:${port}`));
